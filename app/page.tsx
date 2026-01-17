@@ -1,64 +1,127 @@
 import Image from "next/image";
+import Link from "next/link";
+
+// shadcn UI imports (user will ensure these exist)
+import { Button } from "@/components/ui/button";
+import ThemeToggle from "@/components/theme-toggle";
+import { Input } from "@/components/ui/input";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+} from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
+const samplePosts = [
+  {
+    title: "Crafting Beautiful Articles with MDX in Next.js",
+    description: "Use MDX to combine Markdown and React in Next.js for better articles.",
+    date: "Jan 10, 2026",
+    slug: "crafting-beautiful-articles-with-mdx-in-next-js",
+    author: { name: "Agus", avatar: "/avatar-1.png" },
+  },
+  {
+    title: "Designing Accessible Components with Tailwind",
+    description: "Practical tips for building accessible UI components using Tailwind CSS.",
+    date: "Dec 28, 2025",
+    slug: "accessible-components-tailwind",
+    author: { name: "Agus", avatar: "/avatar-2.png" },
+  },
+];
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="min-h-screen bg-zinc-50 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-50 font-sans">
+      <header className="border-b border-zinc-200 dark:border-zinc-800">
+        <div className="mx-auto max-w-4xl px-6 py-6 flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-3">
+            <Image src="/next.svg" alt="logo" width={36} height={24} className="dark:invert" />
+            <div>
+              <h1 className="text-lg font-semibold">Agus Blog</h1>
+              <p className="text-xs text-zinc-600 dark:text-zinc-400">Notes on web, design, and MDX</p>
+            </div>
+          </Link>
+          <nav className="flex items-center gap-3">
+            <Link href="/blog" className="text-sm font-medium hover:underline">
+              Blog
+            </Link>
+            <Link href="/about" className="text-sm font-medium hover:underline">
+              About
+            </Link>
+            <Button size="sm">Subscribe</Button>
+            <ThemeToggle />
+          </nav>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+      </header>
+
+      <main className="mx-auto max-w-4xl px-6 py-12">
+        <section className="grid gap-8 md:grid-cols-3 md:items-center md:gap-6">
+          <div className="md:col-span-2">
+            <h2 className="text-3xl font-bold leading-tight">Welcome — thoughts and tutorials</h2>
+            <p className="mt-3 text-zinc-600 dark:text-zinc-400 max-w-xl">
+              I write about building web interfaces, authoring content with MDX, and practical
+              frontend patterns. Browse the latest posts or search for topics.
+            </p>
+
+            <div className="mt-6 flex w-full gap-3">
+              <Input placeholder="Search posts..." aria-label="Search posts" />
+              <Button>Search</Button>
+            </div>
+          </div>
+
+          <div className="hidden md:block">
+            <div className="rounded-lg bg-white/60 dark:bg-white/5 p-4">
+              <h3 className="text-sm font-semibold">About me</h3>
+              <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">Senior frontend engineer sharing experiments and notes.</p>
+              <div className="mt-3 flex items-center gap-3">
+                <Avatar>
+                  <AvatarImage src="/avatar-1.png" alt="Agus" />
+                  <AvatarFallback>AG</AvatarFallback>
+                </Avatar>
+                <div>
+                  <div className="text-sm font-medium">Agus</div>
+                  <div className="text-xs text-zinc-600 dark:text-zinc-400">Frontend • Writer</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="mt-12">
+          <h3 className="text-2xl font-semibold">Latest posts</h3>
+          <div className="mt-6 grid gap-6 sm:grid-cols-2">
+            {samplePosts.map((post) => (
+              <Card key={post.slug}>
+                <CardHeader>
+                  <CardTitle>
+                    <Link href={`/blog/${post.slug}`} className="hover:underline">
+                      {post.title}
+                    </Link>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-zinc-600 dark:text-zinc-400">{post.description}</p>
+                  <div className="mt-4 flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <Avatar>
+                        <AvatarImage src={post.author.avatar} alt={post.author.name} />
+                        <AvatarFallback>{post.author.name.slice(0,2).toUpperCase()}</AvatarFallback>
+                      </Avatar>
+                      <div className="text-sm">
+                        <div className="font-medium">{post.author.name}</div>
+                        <div className="text-xs text-zinc-600 dark:text-zinc-400">{post.date}</div>
+                      </div>
+                    </div>
+                    <Link href={`/blog/${post.slug}`} className="text-sm font-medium text-foreground">
+                      Read
+                    </Link>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
       </main>
     </div>
   );

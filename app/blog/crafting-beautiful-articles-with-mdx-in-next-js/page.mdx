@@ -1,0 +1,56 @@
+
+export const metadata = {
+	title: "Crafting Beautiful Articles with MDX in Next.js",
+	description: "A concise guide to writing and styling professional MDX articles in Next.js App Router.",
+	date: "2026-01-17",
+	author: "Your Name",
+}
+
+<header className="dek-wrap">
+	<h1>Crafting Beautiful Articles with MDX in Next.js</h1>
+	<p className="dek">A short guide to authoring polished, production-ready articles using MDX and the App Router.</p>
+	<p className="meta">By <strong>Your Name</strong> · Jan 17, 2026</p>
+</header>
+
+## Why use MDX for articles?
+
+MDX lets you write markdown-style content while embedding React components and interactive bits where needed. That makes it ideal for technical articles, tutorials, and marketing pages where you want both content clarity and component-driven interactivity.
+
+> MDX combines the simplicity of markdown with the power of React — the best of both worlds for content-driven sites.
+
+## Quick example
+
+You can import components or include JSX inline directly inside an MDX file:
+
+```jsx
+import { Callout } from '@/components/Callout'
+
+export default function Post() {
+	return (
+		<>
+			<h2>Example</h2>
+			<Callout>MDX lets you embed components like this.</Callout>
+		</>
+	)
+}
+```
+
+## Writing for clarity
+
+- Start with a short dek (summary) under the title.
+- Use subheadings to break up long sections.
+- Prefer short paragraphs and bulleted lists for skimmability.
+
+### Small tips
+
+- Use fenced code blocks for examples.
+- Use blockquotes for important asides.
+- Add metadata (author/date) in frontmatter for programmatic use.
+
+## Conclusion
+
+MDX is a practical way to author content-rich pages in Next.js. Combine it with a shared `mdx-components.tsx` and a simple layout to get consistent, professional-looking articles across your site.
+
+—
+
+Thanks for reading. If you'd like, I can also add a shared `Callout` component and a small author bio component to the project.

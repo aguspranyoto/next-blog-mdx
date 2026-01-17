@@ -10,15 +10,23 @@ export default function MdxLayout({ children }: { children: React.ReactNode }) {
       <header className="border-b border-zinc-200 dark:border-zinc-800">
         <div className="mx-auto max-w-4xl px-6 py-6 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3">
-            <Image src="/next.svg" alt="logo" width={36} height={24} className="dark:invert" />
+            <Image
+              src="/next.svg"
+              alt="logo"
+              width={36}
+              height={24}
+              className="dark:invert"
+            />
             <div>
-              <h1 className="text-lg font-semibold">Agusp Blog</h1>
-              <p className="text-xs text-zinc-600 dark:text-zinc-400">Notes on web, design, and MDX</p>
+              <h1 className="text-lg font-semibold">Agus Pranyoto Blog</h1>
+              <p className="text-xs text-zinc-600 dark:text-zinc-400">
+                Notes on web, design, and MDX
+              </p>
             </div>
           </Link>
-           <nav className="flex items-center gap-3">
-              <ThemeToggle />
-            </nav>
+          <nav className="flex items-center gap-3">
+            <ThemeToggle />
+          </nav>
         </div>
       </header>
 

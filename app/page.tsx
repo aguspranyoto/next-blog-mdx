@@ -13,24 +13,11 @@ import {
 } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-const samplePosts = [
-  {
-    title: "Crafting Beautiful Articles with MDX in Next.js",
-    description: "Use MDX to combine Markdown and React in Next.js for better articles.",
-    date: "Jan 10, 2026",
-    slug: "crafting-beautiful-articles-with-mdx-in-next-js",
-    author: { name: "Agus", avatar: "/avatar-1.png" },
-  },
-  {
-    title: "Designing Accessible Components with Tailwind",
-    description: "Practical tips for building accessible UI components using Tailwind CSS.",
-    date: "Dec 28, 2025",
-    slug: "accessible-components-tailwind",
-    author: { name: "Agus", avatar: "/avatar-2.png" },
-  },
-];
+import { getAllPosts } from "@/lib/posts";
 
-export default function Home() {
+export default async function Home() {
+  const latestPosts = await getAllPosts();
+
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-50 font-sans">
       <header className="border-b border-zinc-200 dark:border-zinc-800">
@@ -38,18 +25,11 @@ export default function Home() {
           <Link href="/" className="flex items-center gap-3">
             <Image src="/next.svg" alt="logo" width={36} height={24} className="dark:invert" />
             <div>
-              <h1 className="text-lg font-semibold">Agus Blog</h1>
+              <h1 className="text-lg font-semibold">Agusp Blog</h1>
               <p className="text-xs text-zinc-600 dark:text-zinc-400">Notes on web, design, and MDX</p>
             </div>
           </Link>
           <nav className="flex items-center gap-3">
-            <Link href="/blog" className="text-sm font-medium hover:underline">
-              Blog
-            </Link>
-            <Link href="/about" className="text-sm font-medium hover:underline">
-              About
-            </Link>
-            <Button size="sm">Subscribe</Button>
             <ThemeToggle />
           </nav>
         </div>
@@ -91,10 +71,10 @@ export default function Home() {
         <section className="mt-12">
           <h3 className="text-2xl font-semibold">Latest posts</h3>
           <div className="mt-6 grid gap-6 sm:grid-cols-2">
-            {samplePosts.map((post) => (
-              <Card key={post.slug}>
+            {latestPosts.map((post) => (
+              <Card key={post.slug} className="gap-2">
                 <CardHeader>
-                  <CardTitle>
+                  <CardTitle className="leading-6 min-h-12">
                     <Link href={`/blog/${post.slug}`} className="hover:underline">
                       {post.title}
                     </Link>
@@ -105,11 +85,11 @@ export default function Home() {
                   <div className="mt-4 flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <Avatar>
-                        <AvatarImage src={post.author.avatar} alt={post.author.name} />
-                        <AvatarFallback>{post.author.name.slice(0,2).toUpperCase()}</AvatarFallback>
+                        <AvatarImage src={typeof post.author === 'object' ? post.author.avatar ?? '/avatar-1.png' : '/avatar-1.png'} alt={typeof post.author === 'object' ? post.author.name : String(post.author)} />
+                        <AvatarFallback>{(typeof post.author === 'object' ? post.author.name : String(post.author)).slice(0,2).toUpperCase()}</AvatarFallback>
                       </Avatar>
                       <div className="text-sm">
-                        <div className="font-medium">{post.author.name}</div>
+                        <div className="font-medium">{typeof post.author === 'object' ? post.author.name : String(post.author)}</div>
                         <div className="text-xs text-zinc-600 dark:text-zinc-400">{post.date}</div>
                       </div>
                     </div>

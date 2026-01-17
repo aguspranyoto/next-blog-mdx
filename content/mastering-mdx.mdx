@@ -1,0 +1,78 @@
+
+export const metadata = {
+	title: "Mastering MDX: Writing Professional Articles with React and Markdown",
+	description: "A practical guide to authoring, styling, and integrating MDX content in Next.js (App Router).",
+	date: "2026-01-18",
+	author: "Agus Pranyoto",
+}
+
+<header className="dek-wrap">
+	<h1>Mastering MDX: Writing Professional Articles with React and Markdown</h1>
+	<p className="dek">How to combine the simplicity of Markdown with the power of React components for production-ready content.</p>
+</header>
+
+MDX lets you write rich, component-driven content using Markdown syntax together with embedded React components. This hybrid approach keeps writing ergonomic for authors while enabling interactive and reusable UI patterns for engineers.
+
+## Why MDX?
+
+- Familiar authoring: Use standard Markdown for prose and code blocks.
+- Component power: Embed interactive components (callouts, examples, demos) directly inside content.
+- Maintainability: Reuse layout and design system components across articles for consistent presentation.
+
+## Getting Started (Next.js App Router)
+
+1. Add MDX support to your Next.js project. The official guide shows how to configure `@next/mdx` and enable `md`/`mdx` page extensions.
+2. Place MDX files in a content folder (for example, `/content`) and import them dynamically in route pages.
+3. Export metadata and/or a default component from each MDX file. The default export becomes the rendered post component.
+
+Example dynamic import (App Router route):
+
+```tsx
+const { default: Post } = await import(`@/content/${slug}.mdx`)
+return <Post />
+```
+
+## Structuring Articles
+
+- Frontmatter: Export a `metadata` object with `title`, `description`, `date`, and `author` for SEO and listing pages.
+- Layout: Wrap content in a shared layout that applies site chrome, meta tags, and MDX components.
+- Components: Keep presentational components (e.g., `Callout`, `AuthorBio`) in a shared `components/` folder and import them in MDX when needed.
+
+## Using Shared MDX Components
+
+Create an `mdx-components.tsx` that exports your MDX components mapping (headings, images, code blocks). Provide that mapping to MDX via the App Router layout or an MDX provider so the entire site shares a consistent look.
+
+## Images and Performance
+
+- Prefer Next.js `Image` for optimized loading. In MDX, replace `img` with a wrapper component that uses `next/image`.
+- Use meaningful `alt` text and consider responsive `sizes` for better CLS and bandwidth usage.
+
+## Accessibility & SEO
+
+- Use semantic HTML for headings and lists.
+- Include metadata (`title`, `description`, `date`, `author`) and render structured data when appropriate.
+
+## Best Practices
+
+- Keep MDX files focused: prefer small, single-topic posts.
+- Avoid heavy logic inside MDX; import small interactive components if you need interactivity.
+- Lint and format MDX like other code: use Prettier and consistent style rules.
+
+## Example: Simple Callout Component
+
+You can import and use components inside MDX like this:
+
+```jsx
+import { Callout } from '@/components/Callout'
+
+<Callout>Use MDX to combine prose and UI components.</Callout>
+```
+
+## Conclusion
+
+MDX is a practical way to manage content that needs both the readability of Markdown and the flexibility of React. With a small amount of setup in Next.js, you get composable, interactive, and maintainable articles that scale with your design system.
+
+---
+
+Source: Next.js MDX guide — https://nextjs.org/docs/app/guides/mdx
+

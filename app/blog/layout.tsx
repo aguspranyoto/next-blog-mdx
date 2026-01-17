@@ -12,16 +12,13 @@ export default function MdxLayout({ children }: { children: React.ReactNode }) {
           <Link href="/" className="flex items-center gap-3">
             <Image src="/next.svg" alt="logo" width={36} height={24} className="dark:invert" />
             <div>
-              <h1 className="text-lg font-semibold">Agus Blog</h1>
+              <h1 className="text-lg font-semibold">Agusp Blog</h1>
               <p className="text-xs text-zinc-600 dark:text-zinc-400">Notes on web, design, and MDX</p>
             </div>
           </Link>
-          <nav className="flex items-center gap-3">
-            <Link href="/blog" className="text-sm font-medium hover:underline">Blog</Link>
-            <Link href="/about" className="text-sm font-medium hover:underline">About</Link>
-            <Button size="sm">Subscribe</Button>
-            <ThemeToggle />
-          </nav>
+           <nav className="flex items-center gap-3">
+              <ThemeToggle />
+            </nav>
         </div>
       </header>
 

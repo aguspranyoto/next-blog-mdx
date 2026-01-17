@@ -4,6 +4,7 @@ import type { NextConfig } from "next";
 const withMDX = createMDX({ extension: /\.(md|mdx)$/ });
 
 const nextConfig: NextConfig = {
+  output: "export",
   pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
 };
 

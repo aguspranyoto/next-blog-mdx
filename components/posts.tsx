@@ -3,12 +3,7 @@ import React, { useState, useMemo, useEffect } from "react";
 import debounce from "lodash.debounce";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-} from "@/components/ui/card";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
 import type { PostMeta } from "@/lib/posts";
@@ -36,11 +31,13 @@ export default function Posts({ posts }: Props) {
           " " +
           (p.description ?? "") +
           " " +
-          (typeof p.author === "object" ? p.author.name : String(p.author ?? ""))
+          (typeof p.author === "object"
+            ? p.author.name
+            : String(p.author ?? ""))
         )
           .toLowerCase()
-          .includes(ql)
-      )
+          .includes(ql),
+      ),
     );
   };
 
@@ -63,14 +60,14 @@ export default function Posts({ posts }: Props) {
             debounced(v);
           }}
         />
-        <Button
+        {/* <Button
           onClick={() => {
             debounced.cancel();
             doSearch(query);
           }}
         >
           Search
-        </Button>
+        </Button> */}
       </div>
 
       <div className="mt-6 grid gap-6 sm:grid-cols-2">
@@ -84,24 +81,55 @@ export default function Posts({ posts }: Props) {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-zinc-600 dark:text-zinc-400">{post.description}</p>
+              <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                {post.description}
+              </p>
               <div className="mt-4 flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <Avatar>
                     <AvatarImage
-                      src={typeof post.author === "object" ? post.author.avatar ?? "/avatar-1.png" : "/avatar-1.png"}
-                      alt={typeof post.author === "object" ? post.author.name : String(post.author)}
+                      src={
+                        typeof post.author === "object"
+                          ? (post.author.avatar ?? "/avatar-1.png")
+                          : "/avatar-1.png"
+                      }
+                      alt={
+                        typeof post.author === "object"
+                          ? post.author.name
+                          : String(post.author)
+                      }
                     />
-                    <AvatarFallback>
-                      {(typeof post.author === "object" ? post.author.name : String(post.author)).slice(0, 2).toUpperCase()}
+                    <AvatarFallback className="border bg-white/60 dark:bg-white/5">
+                      {(() => {
+                        const name =
+                          typeof post.author === "object"
+                            ? post.author.name
+                            : String(post.author);
+                        const initials = name
+                          .split(/\s+/)
+                          .filter(Boolean)
+                          .map((w) => w[0])
+                          .join("")
+                          .toUpperCase();
+                        return initials || name.slice(0, 2).toUpperCase();
+                      })()}
                     </AvatarFallback>
                   </Avatar>
                   <div className="text-sm">
-                    <div className="font-medium">{typeof post.author === "object" ? post.author.name : String(post.author)}</div>
-                    <div className="text-xs text-zinc-600 dark:text-zinc-400">{post.date}</div>
+                    <div className="font-medium">
+                      {typeof post.author === "object"
+                        ? post.author.name
+                        : String(post.author)}
+                    </div>
+                    <div className="text-xs text-zinc-600 dark:text-zinc-400">
+                      {post.date}
+                    </div>
                   </div>
                 </div>
-                <Link href={`/blog/${post.slug}`} className="text-sm font-medium text-foreground">
+                <Link
+                  href={`/blog/${post.slug}`}
+                  className="text-sm font-medium text-foreground"
+                >
                   Read
                 </Link>
               </div>
